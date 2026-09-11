@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drogapolo | Cardápio de Fraldas</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f6f6f6;color:#222}
+header{background:#b51218;color:#fff;padding:22px 18px;text-align:center}
+header h1{margin:0;font-size:30px}header p{margin:7px 0 0;font-size:14px}
+.wrap{max-width:1050px;margin:auto;padding:20px}
+.hero{background:#fff;border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 3px 14px #0001}
+.hero h2{margin:0 0 7px}.hero p{margin:0;color:#666}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+button,.btn{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:bold;text-decoration:none;display:inline-block}
+.filter{background:#fff;border:1px solid #ddd;color:#333}.filter.active{background:#b51218;color:#fff}
+.search{width:100%;padding:13px;border:1px solid #ddd;border-radius:11px;font-size:15px;margin-top:10px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 12px}
+.section-title h2{margin:0}.count{color:#777;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.card{background:#fff;border-radius:17px;overflow:hidden;box-shadow:0 3px 12px #0001;border:1px solid #eee}
+.photo{height:170px;background:linear-gradient(135deg,#fff,#eee);display:flex;align-items:center;justify-content:center;font-size:54px}
+.info{padding:16px}.tag{display:inline-block;background:#ffe35a;padding:5px 8px;border-radius:7px;font-size:11px;font-weight:bold;margin-bottom:8px}
+.info h3{margin:0 0 7px;font-size:17px}.desc{color:#666;font-size:13px;min-height:34px}
+.price{font-size:24px;font-weight:800;color:#b51218;margin:12px 0}.old{text-decoration:line-through;color:#999;font-size:12px;margin-left:5px}
+.buy{background:#1f9d45;color:#fff;width:100%;text-align:center}.buy:hover{filter:brightness(.95)}
+.combo{background:#fff8d9;border:2px solid #f0cf25;border-radius:18px;padding:18px;margin-top:22px}
+.combo h3{margin:0 0 7px}.combo p{color:#555}.combo .price{color:#222}
+footer{text-align:center;color:#777;font-size:13px;padding:30px 10px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}.hero h2{font-size:21px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🍼 DROGAPOLO</h1>
+  <p>Fraldas, higiene e cuidados para o bebê</p>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h2>🛒 Cardápio de Fraldas</h2>
+    <p>Confira tamanhos, preços e ofertas. Escolha o produto e peça pelo WhatsApp.</p>
+    <input class="search" id="search" placeholder="🔎 Procurar fralda, tamanho ou marca...">
+  </section>
+
+  <div class="filters">
+    <button class="filter active" data-filter="todos">Todos</button>
+    <button class="filter" data-filter="RN">RN</button>
+    <button class="filter" data-filter="P">P</button>
+    <button class="filter" data-filter="M">M</button>
+    <button class="filter" data-filter="G">G</button>
+    <button class="filter" data-filter="GG">GG</button>
+    <button class="filter" data-filter="XG">XG</button>
+  </div>
+
+  <div class="section-title"><h2>🔥 Ofertas de hoje</h2><span class="count" id="count"></span></div>
+  <section class="grid" id="products">
+
+    <article class="card" data-size="M" data-name="Babysec Mega M">
+      <div class="photo">👶</div><div class="info">
+        <span class="tag">OFERTA</span><h3>Babysec Mega M</h3>
+        <div class="desc">Pacote com 40 unidades • tamanho M</div>
+        <div class="price">R$ 00,00</div>
+        <a class="btn buy" href="#" onclick="pedir('Babysec Mega M')">🟢 Pedir pelo WhatsApp</a>
+      </div>
+    </article>
+
+    <article class="card" data-size="G" data-name="Babysec Mega G">
+      <div class="photo">👶</div><div class="info">
+        <span class="tag">OFERTA</span><h3>Babysec Mega G</h3>
+        <div class="desc">Pacote com 36 unidades • tamanho G</div>
+        <div class="price">R$ 00,00</div>
+        <a class="btn buy" href="#" onclick="pedir('Babysec Mega G')">🟢 Pedir pelo WhatsApp</a>
+      </div>
+    </article>
+
+    <article class="card" data-size="XG" data-name="Babysec Mega XG">
+      <div class="photo">👶</div><div class="info">
+        <span class="tag">OFERTA</span><h3>Babysec Mega XG</h3>
+        <div class="desc">Pacote com 32 unidades • tamanho XG</div>
+        <div class="price">R$ 00,00</div>
+        <a class="btn buy" href="#" onclick="pedir('Babysec Mega XG')">🟢 Pedir pelo WhatsApp</a>
+      </div>
+    </article>
+
+    <article class="card" data-size="P" data-name="Fralda Marca Exemplo P">
+      <div class="photo">🍼</div><div class="info">
+        <span class="tag">POPULAR</span><h3>Fralda Marca Exemplo P</h3>
+        <div class="desc">Pacote com 40 unidades • tamanho P</div>
+        <div class="price">R$ 00,00</div>
+        <a class="btn buy" href="#" onclick="pedir('Fralda Marca Exemplo P')">🟢 Pedir pelo WhatsApp</a>
+      </div>
+    </article>
+
+    <article class="card" data-size="G" data-name="Fralda Marca Exemplo G">
+      <div class="photo">🍼</div><div class="info">
+        <span class="tag">ECONÔMICA</span><h3>Fralda Marca Exemplo G</h3>
+        <div class="desc">Pacote com 30 unidades • tamanho G</div>
+        <div class="price">R$ 00,00</div>
+        <a class="btn buy" href="#" onclick="pedir('Fralda Marca Exemplo G')">🟢 Pedir pelo WhatsApp</a>
+      </div>
+    </article>
+
+    <article class="card" data-size="GG" data-name="Fralda Marca Exemplo GG">
+      <div class="photo">🍼</div><div class="info">
+        <span class="tag">ECONÔMICA</span><h3>Fralda Marca Exemplo GG</h3>
+        <div class="desc">Pacote com 28 unidades • tamanho GG</div>
+        <div class="price">R$ 00,00</div>
+        <a class="btn buy" href="#" onclick="pedir('Fralda Marca Exemplo GG')">🟢 Pedir pelo WhatsApp</a>
+      </div>
+    </article>
+
+  </section>
+
+  <div class="section-title"><h2>🎁 Combos</h2></div>
+  <section class="combo">
+    <h3>Combo Bebê Econômico</h3>
+    <p>Fralda + lenço umedecido + pomada. Um combo para aumentar o ticket e facilitar a compra.</p>
+    <div class="price">R$ 00,00</div>
+    <a class="btn buy" href="#" onclick="pedir('Combo Bebê Econômico')">🟢 Quero esse combo</a>
+  </section>
+
+  <section class="combo">
+    <h3>🔥 Combo 2 Pacotes</h3>
+    <p>Leve 2 pacotes selecionados com preço especial.</p>
+    <div class="price">R$ 00,00</div>
+    <a class="btn buy" href="#" onclick="pedir('Combo 2 Pacotes')">🟢 Quero esse combo</a>
+  </section>
+</main>
+
+<footer>
+  Drogapolo • Preços e disponibilidade sujeitos a alteração.<br>
+  🚚 Entrega conforme região e condições da loja.
+</footer>
+
+<script>
+const cards=[...document.querySelectorAll('.card')], search=document.getElementById('search'), count=document.getElementById('count');
+let current='todos';
+function render(){
+ const q=search.value.toLowerCase().trim();let visible=0;
+ cards.forEach(c=>{
+   const okSize=current==='todos'||c.dataset.size===current;
+   const okText=!q||(c.dataset.name+' '+c.dataset.size).toLowerCase().includes(q);
+   c.style.display=okSize&&okText?'block':'none';if(okSize&&okText)visible++;
+ });
+ count.textContent=visible+' produto(s)';
+}
+document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');current=b.dataset.filter;render()});
+search.oninput=render;render();
+
+function pedir(produto){
+  alert('Aqui vamos colocar o WhatsApp da Drogapolo.\\n\\nProduto: '+produto);
+}
+</script>
+</body></html>
