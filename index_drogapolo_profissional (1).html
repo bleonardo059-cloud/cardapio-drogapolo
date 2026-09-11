@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drogapolo | Cardápio de Fraldas</title>
+<meta name="description" content="Confira fraldas, produtos infantis e ofertas da Drogapolo.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f6f8;color:#222}
+header{background:#b51218;color:#fff;padding:20px;text-align:center}
+header h1{margin:0;font-size:30px}
+header p{margin:7px 0 0;font-size:14px}
+.container{max-width:1100px;margin:auto;padding:20px}
+.hero{background:#fff;border-radius:18px;padding:24px;text-align:center;box-shadow:0 3px 14px #0001;margin-bottom:18px}
+.hero h2{margin:0 0 7px;font-size:26px}
+.hero p{margin:0;color:#666}
+.search{width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-size:16px;margin-top:18px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.filter{border:1px solid #ddd;background:#fff;color:#333;border-radius:10px;padding:10px 15px;font-weight:bold;cursor:pointer}
+.filter.active{background:#b51218;color:#fff}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
+.section-title h2{margin:0;font-size:21px}
+.count{color:#777;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#fff;border-radius:17px;overflow:hidden;box-shadow:0 3px 12px #0001;border:1px solid #eee}
+.photo{height:220px;background:#f0f1f3;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:contain}
+.placeholder{font-size:45px}
+.info{padding:16px}
+.badge{display:inline-block;background:#fff0d8;color:#9a6100;padding:5px 8px;border-radius:7px;font-size:11px;font-weight:bold;margin-bottom:8px}
+.info h3{margin:0 0 7px;font-size:18px}
+.desc{color:#666;font-size:13px;min-height:35px;margin:0 0 10px}
+.price{font-size:25px;font-weight:800;color:#b51218;margin:8px 0 12px}
+.old{font-size:12px;color:#999;text-decoration:line-through;margin-right:6px}
+.whatsapp{display:block;text-align:center;text-decoration:none;background:#159447;color:#fff;padding:12px;border-radius:10px;font-weight:bold}
+.combo{background:#fff;border-radius:16px;padding:18px;margin-bottom:12px;box-shadow:0 3px 12px #0001}
+.combo h3{margin:0 0 6px}
+.combo p{margin:5px 0;color:#666;font-size:14px}
+.combo .price{margin:8px 0}
+footer{background:#222;color:#fff;text-align:center;padding:22px;margin-top:30px;font-size:13px}
+.empty{background:#fff;padding:30px;text-align:center;border-radius:15px;color:#777}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.container{padding:12px}.grid{grid-template-columns:1fr}.photo{height:250px}header h1{font-size:25px}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🍼 DROGAPOLO</h1>
+  <p>Fraldas e produtos infantis</p>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h2>🛒 Cardápio de Fraldas</h2>
+    <p>Confira nossas opções e peça diretamente pelo WhatsApp.</p>
+    <input id="search" class="search" type="search" placeholder="🔎 Procurar fralda, marca ou tamanho...">
+  </section>
+
+  <div id="filters" class="filters"></div>
+
+  <section>
+    <div class="section-title">
+      <h2>🔥 Fraldas em oferta</h2>
+      <span id="count" class="count"></span>
+    </div>
+    <div id="products" class="grid"></div>
+  </section>
+
+  <section>
+    <div class="section-title"><h2>🎁 Combos</h2></div>
+    <div id="combos"></div>
+  </section>
+</main>
+
+<footer>
+  Drogapolo • Aparecida de Goiânia - GO<br>
+  Consulte disponibilidade e condições pelo WhatsApp.
+</footer>
+
+<script>
+/*
+=========================================================
+🛠️ ÁREA FÁCIL DE EDITAR — ALTERE SOMENTE AQUI
+=========================================================
+
+Para cada produto:
+- nome: nome da fralda
+- tamanho: RN, P, M, G, GG ou XG
+- quantidade: quantidade de fraldas no pacote
+- preco: preço atual
+- antigo: preço anterior (use 0 se não houver)
+- descricao: descrição curta
+- foto: nome da foto enviada para o GitHub
+        Exemplo: "babysec-g.jpg"
+
+IMPORTANTE:
+Se ainda não tiver foto, deixe foto: "".
+=========================================================
+*/
+
+const WHATSAPP = "5500000000000"; // TROQUE pelo WhatsApp da Drogapolo
+
+const produtos = [
+  {
+    nome:"Babysec Mega M",
+    tamanho:"M",
+    quantidade:"40 fraldas",
+    preco:39.90,
+    antigo:0,
+    descricao:"Fralda descartável Babysec Mega tamanho M.",
+    foto:""
+  },
+  {
+    nome:"Babysec Mega G",
+    tamanho:"G",
+    quantidade:"36 fraldas",
+    preco:42.90,
+    antigo:49.90,
+    descricao:"Fralda descartável Babysec Mega tamanho G.",
+    foto:""
+  },
+  {
+    nome:"Babysec Mega XG",
+    tamanho:"XG",
+    quantidade:"32 fraldas",
+    preco:44.90,
+    antigo:0,
+    descricao:"Fralda descartável Babysec Mega tamanho XG.",
+    foto:""
+  },
+  {
+    nome:"Fralda Marca Exemplo P",
+    tamanho:"P",
+    quantidade:"40 fraldas",
+    preco:35.90,
+    antigo:0,
+    descricao:"Fralda descartável tamanho P.",
+    foto:""
+  },
+  {
+    nome:"Fralda Marca Exemplo G",
+    tamanho:"G",
+    quantidade:"30 fraldas",
+    preco:39.90,
+    antigo:0,
+    descricao:"Fralda descartável tamanho G.",
+    foto:""
+  },
+  {
+    nome:"Fralda Marca Exemplo GG",
+    tamanho:"GG",
+    quantidade:"28 fraldas",
+    preco:42.90,
+    antigo:0,
+    descricao:"Fralda descartável tamanho GG.",
+    foto:""
+  }
+];
+
+const combos = [
+  {
+    nome:"Combo Bebê Econômico",
+    descricao:"2 pacotes de fraldas + 1 item infantil.",
+    preco:89.90
+  },
+  {
+    nome:"Combo 2 Pacotes",
+    descricao:"Leve 2 pacotes de fraldas selecionadas.",
+    preco:79.90
+  }
+];
+
+/* Não precisa editar daqui para baixo. */
+const tamanhos=["TODAS","RN","P","M","G","GG","XG"];
+let filtro="TODAS";
+
+function moeda(v){
+  return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+
+function pedidoWhatsApp(p){
+  const texto=`Olá! Quero pedir pelo cardápio da Drogapolo:%0A%0A${encodeURIComponent(p.nome)}%0A${encodeURIComponent(p.quantidade)}%0A${moeda(p.preco)}%0A%0AÉ possível reservar?`;
+  return `https://wa.me/${WHATSAPP}?text=${texto}`;
+}
+
+function renderFilters(){
+  document.getElementById("filters").innerHTML=tamanhos.map(t=>
+    `<button class="filter ${t===filtro?"active":""}" onclick="setFiltro('${t}')">${t}</button>`
+  ).join("");
+}
+
+function renderProducts(){
+  const busca=document.getElementById("search").value.toLowerCase().trim();
+  const lista=produtos.filter(p=>{
+    const bateFiltro=filtro==="TODAS" || p.tamanho===filtro;
+    const bateBusca=!busca || `${p.nome} ${p.tamanho} ${p.descricao}`.toLowerCase().includes(busca);
+    return bateFiltro && bateBusca;
+  });
+
+  document.getElementById("count").textContent=`${lista.length} produto(s)`;
+
+  if(!lista.length){
+    document.getElementById("products").innerHTML=`<div class="empty" style="grid-column:1/-1">Nenhuma fralda encontrada.</div>`;
+    return;
+  }
+
+  document.getElementById("products").innerHTML=lista.map(p=>{
+    const foto=p.foto
+      ? `<img src="${p.foto}" alt="${p.nome}">`
+      : `<div class="placeholder">🍼</div>`;
+
+    const antigo=p.antigo>0 ? `<span class="old">${moeda(p.antigo)}</span>` : "";
+    const oferta=p.antigo>0 ? `<span class="badge">🔥 OFERTA</span>` : `<span class="badge">DISPONÍVEL</span>`;
+
+    return `
+      <article class="card">
+        <div class="photo">${foto}</div>
+        <div class="info">
+          ${oferta}
+          <h3>${p.nome}</h3>
+          <p class="desc">${p.descricao}<br>📦 ${p.quantidade}</p>
+          <div class="price">${antigo}${moeda(p.preco)}</div>
+          <a class="whatsapp" href="${pedidoWhatsApp(p)}" target="_blank">📲 Pedir pelo WhatsApp</a>
+        </div>
+      </article>`;
+  }).join("");
+}
+
+function renderCombos(){
+  document.getElementById("combos").innerHTML=combos.map(c=>`
+    <div class="combo">
+      <h3>🎁 ${c.nome}</h3>
+      <p>${c.descricao}</p>
+      <div class="price">${moeda(c.preco)}</div>
+      <a class="whatsapp" href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Quero informações sobre o "+c.nome)}" target="_blank">📲 Quero esse combo</a>
+    </div>
+  `).join("");
+}
+
+function setFiltro(t){
+  filtro=t;
+  renderFilters();
+  renderProducts();
+}
+
+document.getElementById("search").addEventListener("input",renderProducts);
+renderFilters();
+renderProducts();
+renderCombos();
+</script>
+</body>
+</html>
